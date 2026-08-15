@@ -1,0 +1,157 @@
+/* @theme golden-deck */
+/* @size golden 1920px 1080px */
+
+/* Registered as a Marp theme by scripts/render.py (--theme-set). The @size
+   directive above only takes effect from a registered theme file — declaring it
+   in an inline <style> block in slides.md is silently ignored, which is what
+   pinned this deck to Marp's default 1280x720 canvas while the tokens were
+   calibrated for 1920x1080. */
+
+@import url('../../theme/tokens.css');
+
+section {
+  /* No width/height here: @size owns the canvas. Setting them from
+     --canvas-w/--canvas-h overflowed the real canvas and clipped every slide. */
+  position: relative;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  letter-spacing: var(--track-body);
+  padding: var(--slide-margin);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: var(--gap-unrelated);
+}
+
+section > * { margin: 0; }
+
+section::after {
+  content: attr(data-marpit-pagination);
+  position: absolute;
+  right: var(--space-8);
+  bottom: var(--space-8);
+  font-family: var(--font-body);
+  font-size: var(--fs-footer);
+  /* currentColor, not var(--ink): --ink is the light-slide value, so a hard
+     reference made the page number #111827 on the #111827 dark sandwich —
+     invisible on slides 1 and 6. Inheriting flips it with the layout. */
+  color: currentColor;
+  opacity: var(--footer-opacity);
+}
+
+h1, h2 {
+  font-family: var(--font-display);
+  letter-spacing: var(--track-display);
+  font-weight: 600;
+}
+
+.accent { color: var(--accent); }
+
+/* ---- title (dark sandwich, opens the deck) ---- */
+section.title {
+  background: var(--bg-dark);
+  color: var(--ink-dark);
+  align-items: flex-start;
+  text-align: left;
+}
+section.title .eyebrow {
+  font-family: var(--font-body);
+  font-size: var(--fs-caption);
+  letter-spacing: var(--track-caps);
+  text-transform: uppercase;
+  color: var(--accent-on-dark);
+}
+section.title h1 {
+  font-size: var(--fs-display);
+  line-height: var(--lh-display);
+  max-width: var(--measure-display);
+  color: var(--ink-dark);
+}
+
+/* ---- statement (single centered claim) ---- */
+section.statement {
+  align-items: center;
+  text-align: center;
+}
+section.statement h1 {
+  font-size: var(--fs-h);
+  line-height: var(--lh-h);
+  max-width: var(--measure-display);
+  color: var(--ink);
+}
+/* closing statement reuses the title's dark sandwich */
+section.statement.dark {
+  background: var(--bg-dark);
+  color: var(--ink-dark);
+}
+section.statement.dark h1 { color: var(--ink-dark); }
+section.statement.dark .accent { color: var(--accent-on-dark); }
+
+/* ---- comparison (cards on a grid, one phrase each) ---- */
+section.compare {
+  align-items: center;
+  justify-content: center;
+}
+section.compare .cards {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--card-gap);
+}
+section.compare .card {
+  background: var(--surface);
+  border-top: var(--space-2) solid var(--accent);
+  padding: var(--card-padding);
+  border-radius: var(--space-2);
+  text-align: center;
+}
+section.compare .card p {
+  font-family: var(--font-display);
+  font-size: var(--fs-subhead);
+  line-height: var(--lh-subhead);
+  color: var(--ink);
+}
+
+/* ---- framed (diagram slides) ---- */
+section.framed {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+section.framed .diagram-slot {
+  width: 100%;
+  min-height: var(--space-64);
+  border: var(--space-1) dashed var(--neutral-300);
+  border-radius: var(--space-2);
+  background: var(--surface);
+}
+section.framed .caption {
+  font-family: var(--font-body);
+  font-size: var(--fs-caption);
+  color: var(--ink-muted);
+}
+section.framed .annotation {
+  font-family: var(--font-body);
+  font-size: var(--fs-caption);
+  letter-spacing: var(--track-caps);
+  /* Neutral on purpose: the accented gate markers in the diagram are this
+     slide's one accent moment (rule 13). Accenting the legend as well gave the
+     slide two competing accents and split the focal point. */
+  color: var(--ink-muted);
+}
+section.framed .diagram {
+  width: 100%;
+}
+.diagram .node-plain rect { fill: var(--surface); stroke: var(--neutral-300); stroke-width: 3; rx: var(--space-3); }
+.diagram .node-gate rect { fill: var(--surface); stroke: var(--accent); stroke-width: 4; rx: var(--space-3); }
+.diagram .node-label { font-family: var(--font-body); font-size: var(--fs-subhead); font-weight: 600; fill: var(--ink); }
+.diagram .arrow { stroke: var(--neutral-400); stroke-width: 4; fill: none; }
+.diagram .arrow-head { fill: var(--neutral-400); }
+.diagram .gate-icon-bg { fill: var(--accent-100); stroke: var(--accent); stroke-width: 3; }
+.diagram .gate-icon-mark { fill: var(--accent); }
+.diagram .gate-icon-check { stroke: var(--accent); stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; fill: none; }

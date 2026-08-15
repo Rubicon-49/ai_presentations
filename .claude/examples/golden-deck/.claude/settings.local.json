@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p decks/golden-deck)",
+      "Bash(cp .claude/examples/golden-deck/brief.md decks/golden-deck/brief.md)",
+      "Bash(python3 -c ' *)",
+      "Bash(.venv/bin/python -c ' *)",
+      "Bash(npm root *)",
+      "Bash(find / -maxdepth 6 -type d -iname \"marp-core\")",
+      "Bash(.venv/bin/python -c \"import numpy; print\\('numpy', numpy.__version__\\)\")",
+      "Bash(.venv/bin/python scripts/check_contrast.py decks/golden-deck/build)",
+      "Bash(echo \"exit=$?\")"
+    ]
+  }
+}

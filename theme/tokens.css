@@ -1,0 +1,85 @@
+/* theme/tokens.css
+   The deck's "ubiquitous language" for its look. Every generated slide and every
+   QA script reads from here — change a value once and the whole deck follows.
+   Values are chosen to satisfy the thresholds in
+   slide-design/references/design-principles.md (Appendix A).
+
+   >>> BRAND SWAP POINT: to brand a deck, change only the two font names below and
+   the accent ramp (--accent-*). Everything else is derived and gets verified by
+   the QA contrast/whitespace checks at build. <<< */
+
+:root {
+  /* ---- Canvas (16:9, 1920×1080 reference) ---- */
+  --canvas-w: 1920px;
+  --canvas-h: 1080px;
+
+  /* ---- Spacing: strict 8-pt grid (allowed scale only) ----
+     outer margin ≥96 (5% safe-zone) · card padding 32–48 · card gap ≥24
+     related ≤16 · unrelated ≥48 */
+  --space-1: 4px;    --space-2: 8px;    --space-3: 12px;   --space-4: 16px;
+  --space-6: 24px;   --space-8: 32px;   --space-10: 40px;  --space-12: 48px;
+  --space-16: 64px;  --space-20: 80px;  --space-24: 96px;  --space-32: 128px;
+  --space-40: 160px; --space-48: 192px; --space-64: 256px;
+
+  --slide-margin:  var(--space-24);  /* 96px = 5% edge safe-zone   */
+  --card-padding:  var(--space-8);   /* 32px  (32–48 allowed)      */
+  --card-gap:      var(--space-6);   /* 24px minimum               */
+  --gap-related:   var(--space-4);   /* ≤16px → same group         */
+  --gap-unrelated: var(--space-12);  /* ≥48px → different group    */
+  --grid-cols: 12;
+  --grid-gutter: var(--space-8);     /* 32px gutter                */
+
+  /* ---- Type: ≤2 families · one modular ratio (1.333) · exactly 6 sizes ----
+     body ≥24 screen · headline ≥48 · caption ≥18 · footer 14–16
+     hierarchy: headline:body ∈ [2.0,4.0] · subhead:body ∈ [1.25,1.5] */
+  --font-display: "Source Serif 4", Georgia, serif;   /* serif ↔ sans contrast */
+  --font-body:    "Inter", system-ui, sans-serif;
+  /* safer single-family option: set both to "Inter" */
+
+  --fs-display: 84px;  /* hero/title      84/28 = 3.00 ✓ */
+  --fs-h:       64px;  /* slide headline  64/28 = 2.29 ✓ (≥48 floor) */
+  --fs-subhead: 36px;  /* subhead         36/28 = 1.29 ✓ */
+  --fs-body:    28px;  /* body            ≥24 screen floor */
+  --fs-caption: 20px;  /* caption         ≥18 floor */
+  --fs-footer:  16px;  /* source/footer   pair with --footer-opacity */
+  /* 6 sizes total; use ≤4 on any single slide */
+
+  --lh-display: 1.10;  --lh-h: 1.15;   --lh-subhead: 1.30;  --lh-body: 1.45;
+  --track-display: -0.02em;  --track-body: 0;  --track-caps: 0.06em;
+  --footer-opacity: 0.75;    /* was 50–60%, which put 16px footer text at 3.9:1 —
+                                below the 4.5:1 body floor. 0.75 → 7.6:1 ✓ AAA.
+                                Contrast wins over the aesthetic band. */
+  --measure-body: 60ch;      /* line length ≤60 */
+  --measure-display: 30ch;
+
+  /* ---- Color: 60-30-10 · HSL-derived ramps · ONE accent ----
+     dominant neutral ~60% (bg) · secondary ~30% (text/surfaces) · accent ~10%.
+     Design to AAA (7:1) so projection still clears AA.
+     Never encode meaning in hue alone — pair accent with weight/shape/label. */
+
+  --neutral-50:  #F7F8FA;  --neutral-100: #EEF0F4;  --neutral-200: #DCE0E7;
+  --neutral-300: #C2C8D2;  --neutral-400: #97A0AE;  --neutral-500: #6B7686;
+  --neutral-600: #4B5563;  --neutral-700: #364152;  --neutral-800: #212936;
+  --neutral-900: #111827;
+
+  /* accent — deliberately NOT generic blue (an "ember" orange, h≈18-21) */
+  --accent-50:  #FEF3EC;  --accent-100: #FBDBC7;  --accent-300: #F0A576;
+  --accent-500: #D2601A;  --accent-600: #B44E12;  --accent-700: #8A390D;
+
+  /* semantic — light "content" slide */
+  --bg:          var(--neutral-50);
+  --surface:     #FFFFFF;
+  --ink:         var(--neutral-900);  /* on --bg ≈ 16:1 ✓ AAA */
+  --ink-muted:   var(--neutral-600);  /* on --bg ≈  7:1 ✓ AAA */
+  --accent:      var(--accent-700);   /* on --bg ≈ 7.4:1 ✓ AAA (was accent-600 at 4.9:1,
+                                         which missed the 7:1 this deck advertises) */
+  --accent-fill: var(--accent-100);
+
+  /* semantic — dark "sandwich" slides (title + closing) */
+  --bg-dark:        var(--neutral-900);
+  --ink-dark:       var(--neutral-50);   /* ≈ 16:1 ✓ */
+  --accent-on-dark: var(--accent-300);
+
+  /* ---- Motion (≤300ms · no autoplay · no >3 flashes/s) ---- */
+  --transition: 200ms;
+}

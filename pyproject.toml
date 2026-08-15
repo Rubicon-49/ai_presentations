@@ -1,0 +1,27 @@
+[project]
+name = "power-deck"
+version = "0.1.0"
+description = "Presentations-as-code pipeline: brief -> outline -> tokens -> build -> QA, with rendered-image checks"
+requires-python = ">=3.13"
+dependencies = [
+    "playwright>=1.48",   # fallback renderer (render.py)
+    "pillow>=10.4",       # contrast + whitespace pixel checks
+    "numpy>=2.5.2",
+]
+
+[project.optional-dependencies]
+ocr = [
+    "pytesseract>=0.3.13",  # only if you later tighten check_contrast with a text mask
+]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.6",
+    "pytest>=8.3",
+]
+
+[tool.uv]
+# uv-specific settings can go here later; defaults are fine for now.
+
+[tool.ruff]
+line-length = 100
