@@ -97,8 +97,8 @@ Optional:
 ## Installation
 
 ```bash
-git clone git@github.com:Rubicon-49/ai_expert_user.git
-cd ai_expert_user
+git clone git@github.com:Rubicon-49/ai_presentations.git
+cd ai_presentations
 
 # Python dependencies
 uv sync
